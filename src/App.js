@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import Section from './components/Section';
 import PageTitle from './components/PageTitle';
 import Title from './components/Title';
+import ContactForm from './components/ContactForm';
 class App extends Component {
   state = {
     contacts: [
@@ -12,36 +12,12 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
-  handleInputChange = event => {
-    const { name, value } = event.currentTarget;
-
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-    const id = uuidv4();
-    const { contacts, name, number } = this.state;
-
-    if (!name) {
-      return;
-    }
-
-    const newContact = { id: id, name: name, number: number };
+  submitHandler = newContact => {
+    const { contacts } = this.state;
 
     this.setState({ contacts: [...contacts, newContact] });
-
-    this.reset();
-  };
-
-  reset = () => {
-    this.setState({ name: '', number: '' });
   };
 
   render() {
@@ -56,30 +32,9 @@ class App extends Component {
         <PageTitle title="Phone Book" />
         <Section>
           <Title title="Add contacts" />
+          <ContactForm submitHandler={this.submitHandler} />
         </Section>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name
-            <input
-              type="name"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleInputChange}
-              required
-            />
-          </label>
-          <label>
-            Number
-            <input
-              type="tel"
-              name="number"
-              value={this.state.number}
-              onChange={this.handleInputChange}
-              required
-            />
-          </label>
-          <button type="submit">Add contact</button>
-        </form>
+
         <h2>Contacts</h2>
         <label>
           Find contacts by name
