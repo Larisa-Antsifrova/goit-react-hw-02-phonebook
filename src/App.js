@@ -18,7 +18,12 @@ class App extends Component {
 
   submitHandler = newContact => {
     const { contacts } = this.state;
-
+    const existingContact = contacts.find(
+      contact => contact.name === newContact.name,
+    );
+    if (existingContact) {
+      alert(`${existingContact.name} is already in contacts.`);
+    }
     this.setState({ contacts: [...contacts, newContact] });
   };
 
