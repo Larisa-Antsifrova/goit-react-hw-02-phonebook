@@ -54,7 +54,7 @@ class App extends Component {
     );
 
     return (
-      <div>
+      <>
         <PageTitle title="Phone Book" />
         <Section>
           <Title title="Add contacts" />
@@ -69,7 +69,7 @@ class App extends Component {
             onDeleteContact={this.deleteContact}
           />
         </Section>
-      </div>
+      </>
     );
   }
 }
