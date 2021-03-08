@@ -38,3 +38,10 @@
 
   background-color: #ff8a80;
 }
+
+.notification {
+  list-style-type: none;
+  text-align: center;
+
+  color: #ff8a80;
+}

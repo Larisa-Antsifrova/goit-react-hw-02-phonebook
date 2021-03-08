@@ -24,7 +24,7 @@ const ContactList = ({ filtered, onDeleteContact }) => {
           </li>
         ))
       ) : (
-        <li>No contact found</li>
+        <li className={styles.notification}>No contact found</li>
       )}
     </ul>
   );
