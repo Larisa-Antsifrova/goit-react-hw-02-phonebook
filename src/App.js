@@ -3,6 +3,7 @@ import Section from './components/Section';
 import PageTitle from './components/PageTitle';
 import Title from './components/Title';
 import ContactForm from './components/ContactForm';
+import Filter from './components/Filter';
 class App extends Component {
   state = {
     contacts: [
@@ -20,10 +21,18 @@ class App extends Component {
     this.setState({ contacts: [...contacts, newContact] });
   };
 
+  filterUpdate = event => {
+    const { value } = event.currentTarget;
+
+    this.setState({
+      filter: value,
+    });
+  };
+
   render() {
     const filtered = this.state.contacts.filter(
       ({ name, number }) =>
-        name.toLowerCase().includes(this.state.filter) ||
+        name.toLowerCase().includes(this.state.filter.toLocaleLowerCase()) ||
         number.includes(this.state.filter),
     );
 
@@ -33,20 +42,13 @@ class App extends Component {
         <Section>
           <Title title="Add contacts" />
           <ContactForm submitHandler={this.submitHandler} />
+          <Title title="Сontacts" />
+          <Filter
+            filterValue={this.state.filter}
+            filterUpdate={this.filterUpdate}
+          />
         </Section>
 
-        <h2>Contacts</h2>
-        <label>
-          Find contacts by name
-          <input
-            type="text"
-            name="filter"
-            value={this.state.filter}
-            onChange={this.handleInputChange}
-            autoComplete="off"
-            required
-          />
-        </label>
         <ul>
           {filtered.length ? (
             filtered.map(contact => (
