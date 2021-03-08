@@ -4,7 +4,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    filter: '',
     name: '',
     number: '',
   };
@@ -38,6 +44,12 @@ class App extends Component {
   };
 
   render() {
+    const filtered = this.state.contacts.filter(
+      ({ name, number }) =>
+        name.toLowerCase().includes(this.state.filter) ||
+        number.includes(this.state.filter),
+    );
+
     return (
       <div>
         <h1>Phone Book</h1>
@@ -64,13 +76,25 @@ class App extends Component {
           </label>
           <button type="submit">Add contact</button>
         </form>
-
+        <h2>Contacts</h2>
+        <input
+          type="text"
+          name="filter"
+          value={this.state.filter}
+          onChange={this.handleInputChange}
+          autoComplete="off"
+          required
+        />
         <ul>
-          {this.state.contacts.map(contact => (
-            <li key={contact.id}>
-              {contact.name}: {contact.number}
-            </li>
-          ))}
+          {filtered.length ? (
+            filtered.map(contact => (
+              <li key={contact.id}>
+                {contact.name}: {contact.number}
+              </li>
+            ))
+          ) : (
+            <li>No contact found</li>
+          )}
         </ul>
       </div>
     );
