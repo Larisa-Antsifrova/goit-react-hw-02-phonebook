@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-
 import { v4 as uuidv4 } from 'uuid';
-
+import Section from './components/Section';
+import PageTitle from './components/PageTitle';
+import Title from './components/Title';
 class App extends Component {
   state = {
     contacts: [
@@ -52,7 +53,10 @@ class App extends Component {
 
     return (
       <div>
-        <h1>Phone Book</h1>
+        <PageTitle title="Phone Book" />
+        <Section>
+          <Title title="Add contacts" />
+        </Section>
         <form onSubmit={this.handleSubmit}>
           <label>
             Name
@@ -77,14 +81,17 @@ class App extends Component {
           <button type="submit">Add contact</button>
         </form>
         <h2>Contacts</h2>
-        <input
-          type="text"
-          name="filter"
-          value={this.state.filter}
-          onChange={this.handleInputChange}
-          autoComplete="off"
-          required
-        />
+        <label>
+          Find contacts by name
+          <input
+            type="text"
+            name="filter"
+            value={this.state.filter}
+            onChange={this.handleInputChange}
+            autoComplete="off"
+            required
+          />
+        </label>
         <ul>
           {filtered.length ? (
             filtered.map(contact => (
