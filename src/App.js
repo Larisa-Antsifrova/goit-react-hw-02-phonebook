@@ -4,26 +4,29 @@ import { v4 as uuidv4 } from 'uuid';
 
 class App extends Component {
   state = {
-    contacts: [{ id: 1, name: 'Larisa' }],
+    contacts: [],
     name: '',
+    number: '',
   };
 
   handleInputChange = event => {
-    const { value } = event.currentTarget;
+    const { name, value } = event.currentTarget;
 
-    this.setState({ name: value });
+    this.setState({
+      [name]: value,
+    });
   };
 
   handleSubmit = event => {
     event.preventDefault();
     const id = uuidv4();
-    const { contacts, name } = this.state;
+    const { contacts, name, number } = this.state;
 
     if (!name) {
       return;
     }
 
-    const newContact = { id: id, name: name };
+    const newContact = { id: id, name: name, number: number };
 
     this.setState({ contacts: [...contacts, newContact] });
 
@@ -31,7 +34,7 @@ class App extends Component {
   };
 
   reset = () => {
-    this.setState({ name: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
@@ -43,8 +46,20 @@ class App extends Component {
             Name
             <input
               type="name"
+              name="name"
               value={this.state.name}
               onChange={this.handleInputChange}
+              required
+            />
+          </label>
+          <label>
+            Number
+            <input
+              type="tel"
+              name="number"
+              value={this.state.number}
+              onChange={this.handleInputChange}
+              required
             />
           </label>
           <button type="submit">Add contact</button>
@@ -52,7 +67,9 @@ class App extends Component {
 
         <ul>
           {this.state.contacts.map(contact => (
-            <li key={contact.id}>{contact.name}</li>
+            <li key={contact.id}>
+              {contact.name}: {contact.number}
+            </li>
           ))}
         </ul>
       </div>
