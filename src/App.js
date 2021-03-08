@@ -4,6 +4,7 @@ import PageTitle from './components/PageTitle';
 import Title from './components/Title';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
+import ContactList from './components/ContactList';
 class App extends Component {
   state = {
     contacts: [
@@ -47,19 +48,8 @@ class App extends Component {
             filterValue={this.state.filter}
             filterUpdate={this.filterUpdate}
           />
+          <ContactList filtered={filtered} />
         </Section>
-
-        <ul>
-          {filtered.length ? (
-            filtered.map(contact => (
-              <li key={contact.id}>
-                {contact.name}: {contact.number}
-              </li>
-            ))
-          ) : (
-            <li>No contact found</li>
-          )}
-        </ul>
       </div>
     );
   }
