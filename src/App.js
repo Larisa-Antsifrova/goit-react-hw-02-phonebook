@@ -25,7 +25,7 @@ class App extends Component {
       alert(`${existingContact.name} is already in contacts.`);
       return;
     }
-    this.setState({ contacts: [...contacts, newContact] });
+    this.setState({ contacts: [newContact, ...contacts] });
   };
 
   filterUpdate = event => {
