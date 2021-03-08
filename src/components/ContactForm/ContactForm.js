@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import styles from './ContactForm.module.css';
+
 class ContactForm extends Component {
   state = { name: '', number: '' };
 
@@ -34,7 +36,7 @@ class ContactForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className={styles.form} onSubmit={this.handleSubmit}>
         <label>
           Name
           <input
@@ -55,7 +57,9 @@ class ContactForm extends Component {
             required
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button type="submit" className={styles.btn}>
+          Add
+        </button>
       </form>
     );
   }
