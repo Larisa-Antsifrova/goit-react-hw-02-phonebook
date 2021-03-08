@@ -33,10 +33,14 @@
   background-color: transparent;
 
   outline: none;
+
+  cursor: pointer;
 }
 
 .btn:hover,
 .btn:focus {
   color: #ffffff;
   background-color: #2e7d32;
+
+  outline: none;
 }
