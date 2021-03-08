@@ -32,7 +32,7 @@ const ContactList = ({ filtered, onDeleteContact }) => {
 };
 
 ContactList.propTypes = {
-  filtered: PropTypes.arrayof(
+  filtered: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
