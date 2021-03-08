@@ -7,9 +7,9 @@ import styles from './ContactForm.module.css';
 class ContactForm extends Component {
   state = { name: '', number: '' };
 
-  static defaultProps = {};
-
-  static propTypes = {};
+  static propTypes = {
+    submitHandler: PropTypes.func.isRequired,
+  };
 
   handleInputChange = event => {
     const { name, value } = event.currentTarget;
